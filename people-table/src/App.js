@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 
 import Table from "./components/Table/Table";
 
@@ -20,7 +19,7 @@ function App() {
 
                 data.forEach((el) => {
                     loadedData.push({
-                        // avatar: `http://apis.chromeye.com:9191${el.avatar.url}`,
+                        avatar: `http://apis.chromeye.com:9191${el.avatar.url}`,
                         // avatarId: el.avatar.id,
                         id: el.id,
                         firstName: el.firstName,
@@ -42,7 +41,7 @@ function App() {
 
     return (
         <div className="App">
-            <Table title="List of people" list={peopleInfo} width="50%"></Table>
+            <Table list={peopleInfo}></Table>
         </div>
     );
 }
