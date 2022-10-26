@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import Search from "../Search/Search";
+import Dropdown from "../Dropdown/Dropdown";
+
 import "./Table.css";
 
 const colNames = [
@@ -16,6 +18,7 @@ const colNames = [
 
 const Table = ({ list, pageNum = 0, pageSize = 3 }) => {
     const [page, setPage] = useState(pageNum);
+    const [selected, setSelected] = useState("--3--");
 
     const onBack = () => {
         setPage(page - 1 > -1 ? page - 1 : page);
@@ -38,6 +41,7 @@ const Table = ({ list, pageNum = 0, pageSize = 3 }) => {
                         →
                     </button>
                 </div>
+                <Dropdown selected={selected} setSelected={setSelected} />
             </div>
             {list.length > 0 && (
                 <table cellSpacing="0" className="table">
