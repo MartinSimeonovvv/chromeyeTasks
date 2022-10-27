@@ -20,7 +20,6 @@ function App() {
                 data.forEach((el) => {
                     loadedData.push({
                         avatar: `http://apis.chromeye.com:9191${el.avatar.url}`,
-                        // avatarId: el.avatar.id,
                         id: el.id,
                         firstName: el.firstName,
                         lastName: el.lastName,

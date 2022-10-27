@@ -1,9 +1,6 @@
-import { useRef } from "react";
 import "./Search.css";
 
-function Search() {
-    const searchInput = useRef("");
-
+function Search({ filterArrayByKeyword }) {
     return (
         <div className="search-container">
             <input
@@ -11,7 +8,9 @@ function Search() {
                 type="text"
                 name="search"
                 placeholder="Enter keyword"
-                ref={searchInput}
+                onChange={(e) => {
+                    filterArrayByKeyword(e.target.value);
+                }}
             />
         </div>
     );
