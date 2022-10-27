@@ -1,5 +1,6 @@
 .search-input {
     height: 30px;
     width: 450px;
-    border-radius: 1px;
+    border-radius: 10px;
+    padding-left: 15px;
 }

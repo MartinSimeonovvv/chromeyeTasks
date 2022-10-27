@@ -5,7 +5,7 @@ import Dropdown from "../Dropdown/Dropdown";
 
 import "./Table.css";
 
-const colNames = [
+const COL_NAMES = [
     "Avatar",
     "ID",
     "First Name",
@@ -16,9 +16,9 @@ const colNames = [
     "Start Date",
 ];
 
-const Table = ({ list, pageNum = 0, pageSize = 3 }) => {
+const Table = ({ list, pageNum = 0 }) => {
     const [page, setPage] = useState(pageNum);
-    const [selected, setSelected] = useState("--3--");
+    const [selected, setSelected] = useState(3);
     const [filterList, setFilterList] = useState([]);
     const [word, setWord] = useState(false);
 
@@ -32,39 +32,46 @@ const Table = ({ list, pageNum = 0, pageSize = 3 }) => {
         setWord(true);
     };
 
+    //If no keyword is typed in input, to displat whole list
+    const listToDisplay = filterList.length > 0 ? filterList : list;
+    // If keyword is entered and no results are found, to display appropriate message
+    const noMatchFound = filterList.length < 1 && word;
+    // If all people have to be shown on one page
+    const pageSize =
+        typeof selected !== "number" ? listToDisplay.length : selected;
+
     const onBack = () => {
         setPage(page - 1 > -1 ? page - 1 : page);
     };
 
     const onNext = () => {
-        setPage(page + 1 < list.length / pageSize ? page + 1 : page);
+        setPage(page + 1 < listToDisplay.length / selected ? page + 1 : page);
     };
-
-    const listToDisplay = filterList.length > 0 ? filterList : list;
-    const noMatchFound = filterList.length < 1 && word;
 
     return (
         <div className="table-container">
             <div className="search-container">
                 <Search filterArrayByKeyword={filterArrayByKeyword} />
-                <div className="pagination-container">
-                    <label style={{ padding: "0 1em" }}>{page + 1}</label>
-                    <button
-                        className="btn"
-                        onClick={onBack}
-                        disabled={noMatchFound}
-                    >
-                        ←
-                    </button>
-                    <button
-                        className="btn"
-                        onClick={onNext}
-                        disabled={noMatchFound}
-                    >
-                        →
-                    </button>
+                <div className="table-container__rightSide">
+                    <div className="pagination-container">
+                        <label>Page {page + 1}</label>
+                        <button
+                            className="btn"
+                            onClick={onBack}
+                            disabled={noMatchFound}
+                        >
+                            ←
+                        </button>
+                        <button
+                            className="btn"
+                            onClick={onNext}
+                            disabled={noMatchFound}
+                        >
+                            →
+                        </button>
+                    </div>
+                    <Dropdown selected={selected} setSelected={setSelected} />
                 </div>
-                <Dropdown selected={selected} setSelected={setSelected} />
             </div>
             {noMatchFound ? (
                 <p>No matched people found</p>
@@ -73,7 +80,7 @@ const Table = ({ list, pageNum = 0, pageSize = 3 }) => {
                     <table cellSpacing="0" className="table">
                         <thead className="table__thead">
                             <tr>
-                                {colNames.map((headerItem, index) => (
+                                {COL_NAMES.map((headerItem, index) => (
                                     <th key={index}>{headerItem}</th>
                                 ))}
                             </tr>

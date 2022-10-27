@@ -5,7 +5,7 @@ import "./Dropdown.css";
 
 const Dropdown = ({ selected, setSelected }) => {
     const [isActive, setIsActive] = useState(false);
-    const options = ["--1--", "--3--", "--5--", "All"];
+    const options = [1, 3, 5, "All"];
 
     return (
         <div className="dropdown">
@@ -18,13 +18,14 @@ const Dropdown = ({ selected, setSelected }) => {
             </div>
             {isActive && (
                 <div className="dropdown-content">
-                    {options.map((option) => (
+                    {options.map((option, index) => (
                         <div
-                            onClick={(e) => {
+                            onClick={() => {
                                 setSelected(option);
                                 setIsActive(false);
                             }}
                             className="dropdown-item"
+                            key={index}
                         >
                             {option}
                         </div>

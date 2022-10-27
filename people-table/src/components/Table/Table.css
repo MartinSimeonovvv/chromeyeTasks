@@ -11,6 +11,12 @@
     align-items: center;
 }
 
+.table-container__rightSide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .table {
     width: 100%;
     height: auto;
@@ -32,6 +38,10 @@ td {
 
 .pagination-container {
     padding: 10px 0;
+}
+
+.pagination-container>label {
+    padding: 0 1em;
 }
 
 .btn {
